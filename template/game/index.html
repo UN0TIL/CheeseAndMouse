@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mouse Game UI</title>
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Верхняя часть -->
+        <div class="header">
+            <div class="profile">
+                <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="profile-pic">
+                <span class="username">Anna</span>
+            </div>
+            <div class="score">
+                <img src="{% static 'media/cheese.png' %}" alt="Cheese" class="cheese-icon">
+                <span id="count">{{ count }}</span>
+            </div>
+        </div>
+
+        <!-- Центральная зона -->
+        <div class="mouse-area">
+            <div class="mouse">
+                {% csrf_token %}
+                <button id="tap-btn" class="button-mouse">
+                    <img src="{% static 'media/mouse.png' %}" alt="Mouse Character">
+                </button>
+            </div>
+        </div>
+
+        <!-- Нижняя часть -->
+        <div class="footer">
+            <div class="stats">
+                <span id="progress">500/500</span>
+                <div class="boost-timer">BOOST <span id="timer">03:15</span></div>
+            </div>
+            <div class="buttons">
+                <button id="friends-btn">Friends</button>
+<!--                <button id="tap-btn">Tap</button>-->
+                <button id="task-btn">Task</button>
+            </div>
+        </div>
+    </div>
+    <!-- Подключение JS -->
+    <script src="{% static 'js/script.js' %}"></script>
+</body>
+</html>
