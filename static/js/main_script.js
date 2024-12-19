@@ -16,12 +16,12 @@ function updateTimer() {
 }
 
 // Таймер обратного отсчета
-setInterval(() => {
-    if (timer > 0) {
-        timer--;
-        updateTimer();
-    }
-}, 1000);
+// setInterval(() => {
+//     if (timer > 0) {
+//         timer--;
+//         updateTimer();
+//     }
+// }, 1000);
 
 // Логика кнопки для обновления счётчика и отправки запроса
 document.getElementById("tap-btn").addEventListener("click", () => {

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+        <div class="mouse-area">
+            <div class="mouse">
+                {% csrf_token %}
+                <button id="tap-btn" class="button-mouse">
+                    <img src="{% static 'media/mouse.png' %}" alt="Mouse Character">
+                </button>
+            </div>
+        </div>
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/main_script.js' %}"></script>
+{% endblock %}

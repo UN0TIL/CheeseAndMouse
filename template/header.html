@@ -1,0 +1,11 @@
+{% load static %}
+<div class="header">
+    <div class="profile">
+        <img src="{% static 'media/profile.png' %}" alt="Mouse" class="profile-pic">
+        <span class="username">Anna</span>
+    </div>
+    <div class="score">
+        <img src="{% static 'media/cheese.png' %}" alt="Cheese" class="cheese-icon">
+        <span id="count">{{ count }}</span>
+    </div>
+</div>

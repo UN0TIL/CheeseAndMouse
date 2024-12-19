@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CheeseAndMouse</title>
+    <!-- Подключение CSS -->
+    {% block css %}
+
+    {% endblock %}
+</head>
+<body>
+    <div class="game-container">
+
+        <!-- Верхняя часть -->
+        {% include 'header.html' %}
+
+        <!-- Центральная зона -->
+        {% block content %}
+        {% endblock %}
+
+        <!-- Нижняя часть -->
+        {% include 'footer.html' %}
+    </div>
+</body>
+
+    <!-- Подключение JS -->
+
+    {% block js %}
+    {% endblock %}
+</html>

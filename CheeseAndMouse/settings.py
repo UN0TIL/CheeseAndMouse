@@ -34,6 +34,10 @@ ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['*']
 
+CSRF_TRUSTED_ORIGINS = [
+    'https://251f-2a09-bac5-595b-2dc-00-49-227.ngrok-free.app',  # Замените на ваш адрес
+]
+
 
 
 # Application definition

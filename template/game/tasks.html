@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="container">
+    <!-- Профиль -->
+
+    <!-- Заголовок задач -->
+    <h1 class="task-title">TASK</h1>
+    <p class="task-subtitle">Get more coins</p>
+
+    <!-- Список задач -->
+    <div class="task-list">
+        <div class="task-item" onclick="addPoints(200)">
+            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
+            <span class="task-text">Subscribe to Telegram</span>
+            <span class="task-points">+200</span>
+        </div>
+        <div class="task-item" onclick="addPoints(250)">
+            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
+            <span class="task-text">Watch the video</span>
+            <span class="task-points">+250</span>
+        </div>
+        <div class="task-item" onclick="addPoints(100)">
+            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
+            <span class="task-text">Like the post</span>
+            <span class="task-points">+100</span>
+        </div>
+        <div class="task-item" onclick="addPoints(300)">
+            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
+            <span class="task-text">Watch an ad</span>
+            <span class="task-points">+300</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block js %}
+    <script src="{% static 'js/task-script.js' %}"></script>
+{% endblock %}
+
