@@ -11,32 +11,20 @@
     <!-- Профиль -->
 
     <!-- Заголовок задач -->
-    <h1 class="task-title">TASK</h1>
-    <p class="task-subtitle">Get more coins</p>
+    <h1 class="task-title">Задания</h1>
+    <p class="task-subtitle">Получите больше монет</p>
 
     <!-- Список задач -->
-    <div class="task-list">
-        <div class="task-item" onclick="addPoints(200)">
-            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
-            <span class="task-text">Subscribe to Telegram</span>
-            <span class="task-points">+200</span>
+{% csrf_token %}
+<div class="task-list">
+    {% for task in tasks %}
+        <div class="task-item" onclick="addPoints({{ task.point }})">
+            <img src="{{ task.picture.url }}" class="task-icon" alt="Default">
+            <span class="task-text">{{ task.condition|escape }}</span>
+            <span class="task-points">{{ task.point }}</span>
         </div>
-        <div class="task-item" onclick="addPoints(250)">
-            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
-            <span class="task-text">Watch the video</span>
-            <span class="task-points">+250</span>
-        </div>
-        <div class="task-item" onclick="addPoints(100)">
-            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
-            <span class="task-text">Like the post</span>
-            <span class="task-points">+100</span>
-        </div>
-        <div class="task-item" onclick="addPoints(300)">
-            <img src="{% static 'media/mouse.png' %}" alt="Mouse" class="task-icon">
-            <span class="task-text">Watch an ad</span>
-            <span class="task-points">+300</span>
-        </div>
-    </div>
+    {% endfor %}
+
 </div>
 
 {% endblock %}

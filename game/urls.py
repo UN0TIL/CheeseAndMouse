@@ -9,10 +9,10 @@ urlpatterns = [
     path('increment/', views.increment_count, name='increment'),
     path('multiplier/', views.upper, name='upper'),
     path('autoclick/', views.autoclick, name='autoclick'),
-    path('test/', TemplateView.as_view(template_name='test/index_old.html'), name='test'),
-    path('tasks/', views.tasks_view, name='task'),
     path('friends/', views.friends_view, name='friends'),
     path('mission/', views.mission_view, name='mission'),
+    path('tasks/', views.tasks_view, name='task'),
+    path('socible/', include('socible.urls')),
 ]
 
 if settings.DEBUG:

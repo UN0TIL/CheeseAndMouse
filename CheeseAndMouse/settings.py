@@ -50,6 +50,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game.apps.GameConfig',
+    'sociable.apps.SociableConfig',
+
 ]
 
 MIDDLEWARE = [
