@@ -5,10 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CheeseAndMouse</title>
-    <!-- Подключение CSS -->
-    {% block css %}
 
-    {% endblock %}
+    <!-- Подключение CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+
+
 </head>
 <body>
     <div class="game-container">
@@ -26,7 +29,8 @@
 </body>
 
     <!-- Подключение JS -->
-
     {% block js %}
     {% endblock %}
+
+
 </html>

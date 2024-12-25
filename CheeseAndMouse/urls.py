@@ -16,9 +16,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-
+from django.views.generic import TemplateView
 
 urlpatterns = [
+    # path('', TemplateView.as_view(template_name='game/load.html'), name='load'),
     path('', include('game.urls')),
+    # path('auth/', 'social_django.urls', namespace='sociable'),
     path('admin/', admin.site.urls),
 ]

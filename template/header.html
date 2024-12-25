@@ -1,11 +1,14 @@
 {% load static %}
+
 <div class="header">
     <div class="profile">
+        <link rel="icon" href="{% static 'media/favicon.ico' %}">
         <img src="{% static 'media/profile.png' %}" alt="Mouse" class="profile-pic">
-        <span class="username">Anna</span>
+        <span id="user-first-name" class="username">{{ user.first_name }}</span>
     </div>
     <div class="score">
         <img src="{% static 'media/cheese.png' %}" alt="Cheese" class="cheese-icon">
-        <span id="count">{{ count }}</span>
+        <span id="count">{{ count }}{{ user.count }}</span>
     </div>
 </div>
+

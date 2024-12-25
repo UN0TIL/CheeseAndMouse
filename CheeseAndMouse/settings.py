@@ -34,11 +34,17 @@ ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['*']
 
+X_FRAME_OPTIONS = 'ALLOWALL'
+
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True
+
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True
+
 CSRF_TRUSTED_ORIGINS = [
-    'https://251f-2a09-bac5-595b-2dc-00-49-227.ngrok-free.app',  # Замените на ваш адрес
+    'https://c684-2a09-bac5-595f-2432-00-39b-95.ngrok-free.app',  # Замените на ваш адрес
 ]
-
-
 
 # Application definition
 
@@ -50,7 +56,6 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'game.apps.GameConfig',
-    'sociable.apps.SociableConfig',
 
 ]
 
@@ -61,7 +66,7 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'CheeseAndMouse.urls'

@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
-
 {% load static %}
-
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-{% endblock %}
 
 {% block content %}
         <div class="mouse-area">
@@ -17,6 +12,9 @@
         </div>
 {% endblock %}
 
+
 {% block js %}
+    {% csrf_token %}
+    <script src="{% static 'js/load_script.js' %}"></script>
     <script src="{% static 'js/main_script.js' %}"></script>
 {% endblock %}

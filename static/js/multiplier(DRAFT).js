@@ -17,3 +17,12 @@ document.getElementById('multiplier_button').addEventListener('click', function 
     })
     .catch(error => console.error('Ошибка:', error));
 });
+
+
+// Времяночка
+
+// Показываем данные пользователя
+
+// let userid = document.createElement('p'); // Создаем еще параграф
+// userid.innerText = `${tg.initDataUnsafe.user.id}`; // Показываем user_id
+// usercard.appendChild(userid); // Добавляем параграф

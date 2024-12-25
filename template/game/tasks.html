@@ -1,12 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block css %}
-    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
-{% endblock %}
 
 {% block content %}
-
 <div class="container">
     <!-- Профиль -->
 
@@ -24,12 +20,9 @@
             <span class="task-points">{{ task.point }}</span>
         </div>
     {% endfor %}
-
 </div>
-
 {% endblock %}
 
 {% block js %}
     <script src="{% static 'js/task-script.js' %}"></script>
 {% endblock %}
-
