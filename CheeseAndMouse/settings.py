@@ -34,16 +34,21 @@ ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['*']
 
-X_FRAME_OPTIONS = 'ALLOWALL'
+# X_FRAME_OPTIONS = 'ALLOWALL'
 
-SESSION_COOKIE_SAMESITE = 'None'
-SESSION_COOKIE_SECURE = True
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None  # Отключить строгие политики для сторонних контекстов
+SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
+
+
+SESSION_COOKIE_SAMESITE = 'None' # Значение по умолчанию, безопасно для большинства случаев
+SESSION_COOKIE_SECURE = True # # Требует HTTPS (необходимо иметь SSL-сертификат)
+
 
 CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://c684-2a09-bac5-595f-2432-00-39b-95.ngrok-free.app',  # Замените на ваш адрес
+    'https://9c32-104-28-192-95.ngrok-free.app',  # Замените на ваш адрес
 ]
 
 # Application definition
