@@ -9,45 +9,42 @@ import json
 # Нижняя панель
 # !!!!!!!!!!!!!!
 
-
 def save_user_data(request):
-
     if request.method == "POST":
         try:
+
+
+
             data = json.loads(request.body)
-
-            print(data.items())
-
-            user, created = MouseUser.objects.get_or_create(
-                user_id=data["user_id"],
-                defaults={
-                    "first_name": data["first_name"],
-                    "username": data["username"],
-                    "language_code": data["language_code"],
-                },
-            )
-            if not created:  # Если пользователь уже существует, обновите данные
-                user.first_name = data["first_name"]
-                user.username = data["username"]
-                user.language_code = data["language_code"]
+            print(data)
+            if data["user_id"] not in MouseUser.objects.values_list(
+                "user_id", flat=True
+            ):
+                user = MouseUser(
+                    first_name=data["first_name"],
+                    username=data["username"],
+                    user_id=data["user_id"],
+                    language_code=data["language_code"],
+                )
                 user.save()
-
+                print('here')
+            else:
+                user = MouseUser.objects.get(user_id=data["user_id"])
+                print('here2')
+            # Сохраняем user_id в сессии
+            # print(user.__dict__)
             request.session["user_id"] = user.user_id
-            return JsonResponse(
-                {"user": {"user_id": user.user_id, "username": user.username}}
-            )
+            return JsonResponse({"data": data})
         except json.JSONDecodeError:
-            return JsonResponse(
-                {"status": "error", "message": "Invalid JSON"}, status=400
-            )
-    return JsonResponse(
-        {"status": "error", "message": "Invalid request method"}, status=405
-    )
+            return JsonResponse({"status": "error", "message": "Invalid JSON"}, status=400)
+    return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
 
 
 def main_page_view(request):
 
     user_id = request.session.get("user_id")
+    print('!!!!!!!!!!!!!!!!!!')
+    print(user_id)
 
     if not user_id:
         return JsonResponse({"error": "User ID not found in session!!!!"}, status=400)

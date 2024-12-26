@@ -6,6 +6,7 @@ from django.views.generic import TemplateView
 
 urlpatterns = [
     path('', views.main_page_view, name='tap'),
+
     path('save_user_data/', views.save_user_data, name='save_user_data'),
     path('increment/', views.increment_count, name='increment'),
     path('multiplier/', views.upper, name='upper'),

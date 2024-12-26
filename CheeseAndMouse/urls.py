@@ -19,8 +19,8 @@ from django.urls import path, include
 from django.views.generic import TemplateView
 
 urlpatterns = [
-    # path('', TemplateView.as_view(template_name='game/load.html'), name='load'),
-    path('', include('game.urls')),
-    # path('auth/', 'social_django.urls', namespace='sociable'),
+    # path('', TemplateView.as_view(template_name='game/test.html'), name='test'),
+    path('', TemplateView.as_view(template_name='game/load_screen.html'), name='load_screen'),
+    path('game/', include('game.urls')),
     path('admin/', admin.site.urls),
 ]
