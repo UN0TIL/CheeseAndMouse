@@ -27,7 +27,8 @@
 document.getElementById("tap-btn").addEventListener("click", () => {
 
     // Запрос к серверу
-    fetch('/increment/', {
+    // fetch('increment/', {
+    fetch('/game/increment/', {
         method: 'POST',
         headers: {
             'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value,

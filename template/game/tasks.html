@@ -14,11 +14,13 @@
 {% csrf_token %}
 <div class="task-list">
     {% for task in tasks %}
-        <div class="task-item" onclick="addPoints({{ task.point }})">
-            <img src="{{ task.picture.url }}" class="task-icon" alt="Default">
-            <span class="task-text">{{ task.condition|escape }}</span>
-            <span class="task-points">{{ task.point }}</span>
-        </div>
+            <div class="task-item" onclick="addPoints({{ task.point }}, {{ task.id }})">
+<!--             <div class="task-item" data-points="{{ task.point }}" data-id="{{ task.id }}">-->
+                <img src="{{ task.picture.url }}" class="task-icon" alt="Default"/>
+                <span class="task-text">{{ task.condition|escape }}</span>
+                <span class="task-points">{{ task.point }}</span>
+                <span  class="task-times">{{ task.times_minus_one }}</span>
+            </div>
     {% endfor %}
 </div>
 {% endblock %}

@@ -1,12 +1,13 @@
 
 document.addEventListener("DOMContentLoaded", function () {
   const assets = [
-    // { type: "script", url: "/static/js/authentication_script.js" },
-//     { type: "script", url: "/static/js/main_script.js" },
-//     { type: "script", url: "/static/js/task_script.js" },
-//     { type: "style", url: "/static/css/styles.css" },
-    // { type: "image", url: "/static/media/mouse.png" },
-    // { type: "image", url: "/static/media/cheese.png" },
+    { type: "script", url: "/static/js/authentication_script.js" },
+    { type: "script", url: "/static/js/main_script.js" },
+    { type: "script", url: "/static/js/task_script.js" },
+    // { type: "script", url: "/static/js/name.js" },
+    { type: "style", url: "/static/css/styles.css" },
+    { type: "image", url: "/static/media/mouse.png" },
+    { type: "image", url: "/static/media/cheese.png" },
     { type: "image", url: "/static/media/profile.png" },
   ];
 
@@ -16,8 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     loadedAssets++;
     if (loadedAssets === assets.length) {
       // document.body.innerHTML = '<h1>Добро пожаловать!</h1>';
-      //   window.location.href = "/save_user_data/";
-        window.location.href = "/game/tap";
+        window.location.href = "/game/";
     }
   }
 

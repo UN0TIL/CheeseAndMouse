@@ -2,7 +2,6 @@ const tg = window.Telegram.WebApp; // Telegram WebApp API
 
 tg.expand()
 
-console.log('authentication_script')
 
 // Получаем данные пользователя
 const userData = {
@@ -17,8 +16,7 @@ const userData = {
 // Отправляем данные на Django backend
 const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value; // Получаем CSRF-токен из шаблона
 
-// fetch('save_user_data/', { // Укажите правильный URL для вашего Django вью
-fetch('game/save_user_data/', { // Укажите правильный URL для вашего Django вью
+fetch('/save_user_data/', { // Укажите правильный URL для вашего Django вью
     method: 'POST',
     headers: {
         'Content-Type': 'application/json',

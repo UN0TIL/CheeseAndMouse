@@ -22,5 +22,8 @@ urlpatterns = [
     # path('', TemplateView.as_view(template_name='game/test.html'), name='test'),
     path('', TemplateView.as_view(template_name='game/load_screen.html'), name='load_screen'),
     path('game/', include('game.urls')),
+    # path('', include('game.urls')),
+
+    # path('', TemplateView.as_view(template_name='game/test.html'), name='game'),
     path('admin/', admin.site.urls),
 ]
