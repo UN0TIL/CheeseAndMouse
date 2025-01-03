@@ -5,14 +5,12 @@ import json
 
 
 # !!!!!!!!!!!!!!
-# Нижняя панель
+# Аунтификация
 # !!!!!!!!!!!!!!
 
 def save_user_data(request):
-    print('and here')
 
     if request.method == "POST":
-        # print('here1')
         try:
             data = json.loads(request.body)
             print(data)
@@ -28,51 +26,45 @@ def save_user_data(request):
                 )
                 request.session["user_id"] = user.user_id
                 user.save()
-                # print('here')
             else:
                 user = MouseUser.objects.get(user_id=data["user_id"])
-                print('here2')
-            # Сохраняем user_id в сессии
-            # print(user.__dict__)
+
                 request.session["user_id"] = user.user_id
-                print('finish')
+
             return JsonResponse({"data": data})
         except json.JSONDecodeError:
             return JsonResponse({"status": "error", "message": "Invalid JSON"}, status=400)
 
     elif request.method == "GET":
-        print('GET')
         user_id = request.session.get("user_id")
-        print(user_id)
 
         if not user_id:
             return JsonResponse({"error": "User ID not found in session!!!!"}, status=400)
 
         user, created = MouseUser.objects.get_or_create(user_id=user_id)
-        print(user)
 
         return render(request, "game/main_page.html", {"user": user})
 
     return JsonResponse({"status": "error", "message": "Invalid request method"}, status=405)
 
 
+# !!!!!!!!!!!!!!
+# Нижняя панель
+# !!!!!!!!!!!!!!
+
 def main_page_view(request):
 
     user_id = request.session.get("user_id")
-    print('!!!!!!!!!!!!!!!!!!')
-    print(user_id)
 
     if not user_id:
-        return JsonResponse({"error": "User ID not found in session!!!!"}, status=400)
+        return HttpResponseRedirect('/game/save_user_data/')
 
     user, created = MouseUser.objects.get_or_create(user_id=user_id)
-    print(user)
 
     return render(request, "game/main_page.html", {"user": user})
 
 
 def tasks_view(request):
-
 
     user_id = request.session.get("user_id")
 
@@ -116,6 +108,10 @@ def increment_count(request):
             user.count += 1 * user.factor
             user.save()
 
+            # if user.count >= 1000:
+            #     print(user.count)
+            #     return HttpResponseRedirect('/winner/')
+
             return JsonResponse({"count": user.count})
         except MouseUser.DoesNotExist:
             return JsonResponse({"error": "User not found"}, status=404)
@@ -124,94 +120,74 @@ def increment_count(request):
 
     return JsonResponse({"error": "Invalid request method"}, status=405)
 
-def mission_view(request):
 
+
+def mission_view(request):
     user_id = request.session.get("user_id")
 
+    # Проверяем, есть ли user_id в сессии
     if not user_id:
         return JsonResponse({"error": "User ID not found in session"}, status=400)
 
-    if request.method == "GET":
-
-        tasks = Tasks.objects.filter(user__user_id=user_id)
-
-
-        return render(request, "tasks.html", {"tasks": tasks})
-
-    elif request.method == "POST":
+    if request.method == "POST":
         try:
-            user = MouseUser.objects.get(user_id=user_id)
-            tasks = Tasks.objects.filter(user__user_id=user_id)
-
+            # Загружаем данные из запроса
             data = json.loads(request.body)
-            print(data)
+            print('Incoming Data:', data)  # Для проверки входящих данных
 
-            if "point" not in data or not isinstance(data["point"], list):
-                return JsonResponse({"error": "Invalid request"}, status=400)
+            # Проверяем, что поле "point" существует и содержит массив
+            if "point" not in data or not isinstance(data["point"], list) or not data["point"]:
+                return JsonResponse({"error": "Invalid or missing 'point' field"}, status=400)
 
-            points = sum(map(int, data["point"]))
-            user.count += points
+
+            if "id" not in data or not isinstance(data["id"], list) or not data["id"]:
+                return JsonResponse({"error": "Invalid or missing 'point' field"}, status=400)
+
+            # Проверяем, что каждый элемент в поле "point" можно преобразовать в число
+            points = list(map(int, data["point"]))
+            id = list(map(int, data['id']))# Преобразуем список в числа
+            print('Parsed Points:', points)
+
+            # Получаем пользователя
+            user = MouseUser.objects.get(user_id=user_id)
+
+            # Получаем задачу с указанным "point"
+            task = Tasks.objects.filter(user__user_id=user_id).get(id=id[0])
+
+            # Обновляем или удаляем задачу
+            if task.times - 1 <= 0:
+                task.delete()  # Если больше попыток не осталось, удаляем
+            else:
+                task.times -= 1
+                task.save()  # Уменьшаем оставшиеся попытки
+
+            # Обновляем счётчик пользователя
+            user.count += sum(points)
             user.save()
 
-            task = tasks.get(point=data["point"][0])
-            if task.times - 1 == 0:
-                print('here delete')
-                task.delete()
-            else:
-                print('here')
-                task.times -= 1
-                task.save()
+            if user.count >= 1000:
+                return HttpResponseRedirect('/winner/')
 
-            # return render(request, "game/tasks.html", {"tasks": tasks, "user": user})
+            return JsonResponse({
+                "count": user.count,
+                "message": "Task processed successfully."
+            })
 
-            return JsonResponse({"count": user.count, 'tasks': tasks})
-            # return JsonResponse({"count": user.count})
-        except (ValueError, TypeError) as e:
-            return JsonResponse({"error": f"Invalid JSON, Вот проблема: {e}"}, status=400)
+        # Обрабатываем случай с отсутствием задачи
+        except Tasks.DoesNotExist:
+            return JsonResponse({"error": "Task with the specified point does not exist."}, status=404)
 
-    return JsonResponse({"error": "Invalid request"}, status=400)
+        # Обрабатываем ошибки JSON-данных
+        except json.JSONDecodeError:
+            return JsonResponse({"error": "Invalid JSON format"}, status=400)
 
+        # Обрабатываем все другие возможные ошибки
+        except Exception as e:
+            return JsonResponse({"error": f"Unexpected error: {str(e)}"}, status=500)
 
-# def mission_view(request):
-#     user_id = request.session.get("user_id")
-#     # print(user_id)
-#     if not user_id:
-#         return JsonResponse({"error": "User ID not found in session"}, status=400)
-#
-#     if request.method == "GET":
-#
-#         tasks = Tasks.objects.filter(user_id=user_id)
-#
-#         tasks_with_times = []
-#         for task in tasks:
-#             task.times_minus_one = tasks.times - 1
-#             print(task.times_minus_one)
-#             tasks_with_times.append(task)
-#
-#
-#         return render(request, "game/tasks.html", {"tasks": tasks_with_times})
-#
-#
-#     if request.method == "POST":
-#         user, created = MouseUser.objects.get_or_create(user_id=user_id)
-#
-#         try:
-#             data = json.loads(request.body)
-#
-#             if "points" not in data or not isinstance(data["points"], list):
-#                 return JsonResponse({"error": "Invalid request"}, status=400)
-#
-#             points = sum(data["points"])
-#
-#             user.count += points
-#             user.save()
-#
-#             return JsonResponse({"count": user.count})
-#         except (ValueError, TypeError) as e:
-#             return JsonResponse(
-#                 {"error": f"Invalid JSON, Вот проблема: {e}"}, status=400
-#             )
-#     return JsonResponse({"error": "Invalid request"}, status=400)
+    # Если метод не POST
+    return JsonResponse({"error": "Invalid request method"}, status=405)
+
 
 
 def upper(request):

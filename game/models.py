@@ -33,15 +33,13 @@ class MouseUser(models.Model):
 
 
 class Tasks(models.Model):
-    user = models.ForeignKey(MouseUser, on_delete=models.CASCADE, related_name="tasks")
+    user = models.ForeignKey(MouseUser, on_delete=models.CASCADE, related_name="tasks", blank=True, null=True)
     condition = models.CharField(max_length=100)
     point = models.PositiveIntegerField()
     times = models.PositiveIntegerField(default=1)
     url = models.URLField(default="", blank=True)
-    label = models.IntegerField(default=0)
     picture = models.ImageField(
-        upload_to="condition/", default="condition/default.png", blank=True, null=True
-    )
+        upload_to="condition/", default="condition/default.png", blank=True)
 
     class Meta:
         ordering = ['condition', 'point', 'picture']
@@ -62,3 +60,4 @@ class Tasks(models.Model):
             new_img = (100, 100)
             img.thumbnail(new_img)
             img.save(self.picture.path)
+

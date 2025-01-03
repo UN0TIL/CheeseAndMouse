@@ -4,9 +4,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // { type: "script", url: "/static/js/authentication_script.js" },
 //     { type: "script", url: "/static/js/main_script.js" },
 //     { type: "script", url: "/static/js/task_script.js" },
-//     { type: "style", url: "/static/css/styles.css" },
-    // { type: "image", url: "/static/media/mouse.png" },
-    // { type: "image", url: "/static/media/cheese.png" },
+    { type: "style", url: "/static/css/styles.css" },
+    { type: "image", url: "/static/media/mouse.png" },
+    { type: "image", url: "/static/media/cheese.png" },
     { type: "image", url: "/static/media/profile.png" },
   ];
 

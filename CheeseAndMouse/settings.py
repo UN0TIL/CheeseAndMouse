@@ -22,7 +22,7 @@ from django.conf.global_settings import MEDIA_URL
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
@@ -51,7 +51,7 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://e3a4-2a09-bac5-595e-2387-00-38a-4.ngrok-free.app',  # Замените на ваш адрес
+    'https://1771-104-28-192-95.ngrok-free.app',  # Замените на ваш адрес
 ]
 
 # Application definition
