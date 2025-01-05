@@ -51,7 +51,7 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://1771-104-28-192-95.ngrok-free.app',  # Замените на ваш адрес
+    'https://b63c-2a09-bac5-5982-2387-00-38a-3e.ngrok-free.app',  # Замените на ваш адрес
 ]
 
 # Application definition

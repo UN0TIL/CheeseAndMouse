@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Loading...</title>
+  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  {% csrf_token %}
+  <script src="{% static 'js/authentication_script.js' %}"></script>
+
+</head>
+
+<!--<body>-->
+<!--  <div id="loader">-->
+<!--    <div class="spinner"></div>-->
+<!--    <p>Загрузка...</p>-->
+<!--  </div>-->
+<!--  {% csrf_token %}-->
+<!--  <script src="{% static 'js/loader_script.js' %}"></script>-->
+<!--</body>-->
+</html>
+  <div id="loader">
+      <img src="{% static 'media/load_screen.jpg' %}" class="body">
+    <div class="spinner"></div>
+    <p>Загрузка...</p>
+  </div>
+  {% csrf_token %}
+  <script src="{% static 'js/loader_script.js' %}"></script>
+</body>
+</html>
