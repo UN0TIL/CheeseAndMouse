@@ -11,7 +11,10 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 # from importlib.metadata import FastPath
 from pathlib import Path
+from dotenv import load_dotenv
 import os
+
+load_dotenv()
 
 from django.conf.global_settings import MEDIA_URL
 
@@ -19,13 +22,13 @@ from django.conf.global_settings import MEDIA_URL
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-1twz@3dp^oy47ejy)coiz&%vm4jx32=yc$2(@f5-k!70qz$pw7'
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -48,7 +51,7 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://9c32-104-28-192-95.ngrok-free.app',  # Замените на ваш адрес
+    'https://b63c-2a09-bac5-5982-2387-00-38a-3e.ngrok-free.app',  # Замените на ваш адрес
 ]
 
 # Application definition

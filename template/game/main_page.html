@@ -1,12 +1,14 @@
 {% extends 'base.html' %}
 {% load static %}
 
+
 {% block content %}
+
         <div class="mouse-area">
             <div class="mouse">
                 {% csrf_token %}
                 <button id="tap-btn" class="button-mouse">
-                    <img src="{% static 'media/mouse.png' %}" alt="Mouse Character">
+                    <img src="{% static 'media/mouse.png' %}" alt="Mouse Character" onmousedown="return false" onselectstart="return false">
                 </button>
             </div>
         </div>
@@ -14,5 +16,6 @@
 
 
 {% block js %}
+    {% csrf_token %}
     <script src="{% static 'js/main_script.js' %}"></script>
 {% endblock %}

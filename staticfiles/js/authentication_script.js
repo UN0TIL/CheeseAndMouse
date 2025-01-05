@@ -36,4 +36,3 @@ fetch('/save_user_data/', { // Укажите правильный URL для в
     .catch((error) => {
         console.error('Error sending user data:', error);
     });
-

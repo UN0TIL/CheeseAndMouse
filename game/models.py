@@ -22,6 +22,7 @@ class MouseUser(models.Model):
     is_premium = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
+
     class Meta:
         ordering = ["username"]
         verbose_name = "Профиль"
@@ -32,16 +33,21 @@ class MouseUser(models.Model):
 
 
 class Tasks(models.Model):
+    user = models.ForeignKey(MouseUser, on_delete=models.CASCADE, related_name="tasks", blank=True, null=True)
     condition = models.CharField(max_length=100)
     point = models.PositiveIntegerField()
+    times = models.PositiveIntegerField(default=1)
+    url = models.URLField(default="", blank=True)
     picture = models.ImageField(
-        upload_to="condition/", default="condition/default.png", blank=True, null=True
-    )
+        upload_to="condition/", default="condition/default.png", blank=True)
 
     class Meta:
         ordering = ['condition', 'point', 'picture']
         verbose_name = 'Задание'
         verbose_name_plural = 'Задания'
+
+    def __str__(self):
+        return self.condition
 
     def save(self, *args, **kwargs):
         # Данный код открывает изображение и проверяет, имеет ли оно размер больше 100x100 пикселей.
@@ -55,6 +61,3 @@ class Tasks(models.Model):
             img.thumbnail(new_img)
             img.save(self.picture.path)
 
-
-class Player(models.Model):
-    pass

@@ -3,24 +3,24 @@
 
 
 {% block content %}
-<div class="container">
-    <!-- Профиль -->
+    <div class="container">
+        <!-- Заголовок задач -->
+        <h1 class="task-title">Задания</h1>
+        <p class="task-subtitle">Получите больше монет</p>
 
-    <!-- Заголовок задач -->
-    <h1 class="task-title">Задания</h1>
-    <p class="task-subtitle">Получите больше монет</p>
-
-    <!-- Список задач -->
-{% csrf_token %}
-<div class="task-list">
-    {% for task in tasks %}
-        <div class="task-item" onclick="addPoints({{ task.point }})">
-            <img src="{{ task.picture.url }}" class="task-icon" alt="Default">
-            <span class="task-text">{{ task.condition|escape }}</span>
-            <span class="task-points">{{ task.point }}</span>
-        </div>
-    {% endfor %}
-</div>
+        <!-- Список задач -->
+    {% csrf_token %}
+    <div class="task-list">
+        {% for task in tasks %}
+            <a class='delete-button' href="{{ task.url }}">
+                <div class="task-item" onclick="addPoints({{ task.point }}, {{ task.id }})">
+                    <img src="{{ task.picture.url }}" class="task-icon" alt="Default"/>
+                    <span class="task-text">{{ task.condition|escape }}</span>
+                    <span class="task-points">{{ task.point }}</span>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
 {% endblock %}
 
 {% block js %}
