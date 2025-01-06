@@ -4,12 +4,29 @@
 
 {% block content %}
 
+<<<<<<< Updated upstream
         <div class="mouse-area">
             <div class="mouse">
                 {% csrf_token %}
                 <button id="tap-btn" class="button-mouse">
                     <img src="{% static 'media/mouse.png' %}" alt="Mouse Character" onmousedown="return false" onselectstart="return false">
                 </button>
+=======
+    <div class="boost-icon-wrapper">
+        {% csrf_token %}
+        <button onclick="showPopup('Множитель очков X10 <br> Стоимость 100 монет')" id="boost-icon" class="button-mouse">
+            <img src="{% static 'media/boost.png' %}" alt="Boost Icon">
+        </button>
+    </div>
+
+
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <p class="popup-text">Хотите купить буст?</p>
+            <div class="popup-buttons">
+                <button id="popup-confirm" class="popup-button">Подтвердить</button>
+                <button id="popup-cancel" class="popup-button">Отмена</button>
+>>>>>>> Stashed changes
             </div>
         </div>
 {% endblock %}

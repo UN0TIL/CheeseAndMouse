@@ -98,6 +98,67 @@ body {
 
 /* Задачи */
 
+.boost-icon-wrapper {
+    position: absolute; /* замените на absolute или fixed */
+    bottom: 95px;
+    right: 210px; /* Увеличьте значение или добавьте отрицательное значение для смещения правее */
+    z-index: 1000;
+}
+
+.boost-icon-wrapper img {
+    width: 50px;
+    height: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px;
+    background-color: #ffd800;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    padding: 20px;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.popup-button {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #e6c619;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.popup-button:hover {
+    transform: scale(1.1);
+}
+
+.popup-button:active {
+    transform: scale(1.05);
+}
+
+
 #loader {
     text-align: center;
     color: #fff;
@@ -178,11 +239,14 @@ body {
 .stats {
     font-size: 14px;
     margin-bottom: 10px;
+    position: sticky;
+    right: 40px;
 }
 
 .boost-timer {
     font-size: 12px;
     color: yellow;
+    right: 40px;
 }
 
 .buttons {

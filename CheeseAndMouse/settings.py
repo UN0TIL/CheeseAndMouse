@@ -51,7 +51,11 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
+<<<<<<< Updated upstream
     'https://b63c-2a09-bac5-5982-2387-00-38a-3e.ngrok-free.app',  # Замените на ваш адрес
+=======
+    'https://ffb2-2a09-bac5-5980-2dc-00-49-ed.ngrok-free.app',  # Замените на ваш адрес
+>>>>>>> Stashed changes
 ]
 
 # Application definition

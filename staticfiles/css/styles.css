@@ -16,8 +16,10 @@ body {
 }
 
 .game-container {
-    width: 320px;
-    height: 600px;
+    width: 100vh;
+    /*width: 320px;*/
+    /*height: 600px;*/
+    height: 100vh;
     background: radial-gradient(circle, #fdd835, #444);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
@@ -73,6 +75,7 @@ body {
     display: block;         /* Убирает отступы изображения */
     width: 100%;            /* Адаптирует изображение под кнопку */
     height: auto;           /* Сохраняет пропорции изображения */
+    transition: transform 0.2s ease; /* Добавляем плавность для анимации */
 }
 
 .mouse-area {
@@ -84,17 +87,112 @@ body {
 
 .mouse img {
     width: 250px;
-    animation: bounce 1s infinite alternate;
+    animation: bounce 1s alternate;
 }
 
-@keyframes bounce {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
+/* Анимация увеличения при наведении */
+.button-mouse:hover img {
+    transform: scale(1.1);
 }
 
+/* Анимация увеличения при нажатии */
+.button-mouse:active img {
+    transform: scale(1.05);
+}
 
 
 /* Задачи */
+<<<<<<< Updated upstream
+=======
+
+.boost-icon-wrapper {
+    position: fixed;
+    bottom: 20px; /* Отступ снизу */
+    left: 50%; /* Центрирование относительно горизонтали */
+    transform: translateX(-50%); /* Смещение на половину ширины для выравнивания */
+    z-index: 1000;
+}
+
+.boost-icon-wrapper img {
+    width: 500px;
+    height: 50px;
+}
+
+.hidden {
+    display: none;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    max-width: 300px;
+    background-color: #000000;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    z-index: 2000;
+    padding: 20px;
+}
+
+.popup-content {
+    text-align: center;
+}
+
+.popup-buttons {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.popup-button {
+    flex: 1;
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #a89324;
+    color: #333;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.popup-button:hover {
+    transform: scale(1.1);
+}
+
+.popup-button:active {
+    transform: scale(1.05);
+}
+
+.popup-text {
+    word-wrap: break-word; /* Разрешает перенос строки при необходимости */
+    white-space: pre-line; /* Интерпретирует \n как перенос строки */
+    color: #ffffff; /* Цвет текста, например, белый */
+}
+
+
+#loader {
+    text-align: center;
+    color: #fff;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #ccc;
+    border-top: 5px solid #000;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+}
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+>>>>>>> Stashed changes
 .task-title {
     font-size: 24px;
     font-weight: bold;
@@ -156,11 +254,13 @@ body {
 .stats {
     font-size: 14px;
     margin-bottom: 10px;
+    left: 50%;
 }
 
 .boost-timer {
     font-size: 12px;
     color: yellow;
+    left: 50%;
 }
 
 .buttons {

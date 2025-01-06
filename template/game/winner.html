@@ -1,5 +1,5 @@
-{% extends 'base.html' %}
 
-{% block content %}
-        <h1>Ты победил</h1>
-{% endblock %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<img src="{% static 'media/winner.jpg' %}" class="responsive-img" alt="Winner Image">
