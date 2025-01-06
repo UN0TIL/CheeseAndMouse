@@ -13,7 +13,7 @@ def save_user_data(request):
     if request.method == "POST":
         try:
             data = json.loads(request.body)
-            print(data)
+
             if data["user_id"] not in MouseUser.objects.values_list(
                 "user_id", flat=True
             ):
@@ -106,10 +106,9 @@ def increment_count(request):
             user, created = MouseUser.objects.get_or_create(user_id=user_id)
 
             user.count += 1 * user.factor
-            user.save()
             print(user.count)
+            user.save()
             if user.count >= 1000:
-                print('here')
                 return JsonResponse({"redirect": "https://ffb2-2a09-bac5-5980-2dc-00-49-ed.ngrok-free.app/game/winner/"})
                 # return HttpResponseRedirect('/game/winner/')
 

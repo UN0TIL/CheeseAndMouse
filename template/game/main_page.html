@@ -3,15 +3,15 @@
 
 
 {% block content %}
+    <div class="mouse-area">
+        <div class="mouse">
+            {% csrf_token %}
+            <button id="tap-btn" class="button-mouse">
+                <img src="{% static 'media/mouse.png' %}" alt="Mouse Character" onmousedown="return false" onselectstart="return false">
+            </button>
+        </div>
+    </div>
 
-<<<<<<< Updated upstream
-        <div class="mouse-area">
-            <div class="mouse">
-                {% csrf_token %}
-                <button id="tap-btn" class="button-mouse">
-                    <img src="{% static 'media/mouse.png' %}" alt="Mouse Character" onmousedown="return false" onselectstart="return false">
-                </button>
-=======
     <div class="boost-icon-wrapper">
         {% csrf_token %}
         <button onclick="showPopup('Множитель очков X10 <br> Стоимость 100 монет')" id="boost-icon" class="button-mouse">
@@ -26,13 +26,14 @@
             <div class="popup-buttons">
                 <button id="popup-confirm" class="popup-button">Подтвердить</button>
                 <button id="popup-cancel" class="popup-button">Отмена</button>
->>>>>>> Stashed changes
             </div>
         </div>
+    </div>
 {% endblock %}
 
 
 {% block js %}
     {% csrf_token %}
     <script src="{% static 'js/main_script.js' %}"></script>
+    <script src="{% static 'js/popup_script.js' %}"></script>
 {% endblock %}

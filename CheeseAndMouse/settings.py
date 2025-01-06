@@ -51,11 +51,7 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
-<<<<<<< Updated upstream
-    'https://b63c-2a09-bac5-5982-2387-00-38a-3e.ngrok-free.app',  # Замените на ваш адрес
-=======
-    'https://ffb2-2a09-bac5-5980-2dc-00-49-ed.ngrok-free.app',  # Замените на ваш адрес
->>>>>>> Stashed changes
+    'https://7712-2a09-bac1-7500-58-00-49-ed.ngrok-free.app',  # Замените на ваш адрес
 ]
 
 # Application definition
@@ -147,14 +143,18 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-# Для разработки: указываем директории со статикой
-STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+# # Для разработки: указываем директории со статикой
+# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+#
+# # Для продакшена: сюда собираются все файлы командой collectstatic
+# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+#
+# # URL для доступа к статическим файлам
+# STATIC_URL = '/static/'
 
-# Для продакшена: сюда собираются все файлы командой collectstatic
-STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# URL для доступа к статическим файлам
 STATIC_URL = '/static/'
+STATICFILES_DIRS = [BASE_DIR / "static"]  # Проверьте, что указана правильная директория
+STATIC_ROOT = BASE_DIR / "staticfiles"  # Для collectstatic (production)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
