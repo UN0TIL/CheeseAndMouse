@@ -107,10 +107,11 @@ def increment_count(request):
 
             user.count += 1 * user.factor
             user.save()
-
-            # if user.count >= 1000:
-            #     print(user.count)
-            #     return HttpResponseRedirect('/winner/')
+            print(user.count)
+            if user.count >= 1000:
+                print('here')
+                return JsonResponse({"redirect": "https://ffb2-2a09-bac5-5980-2dc-00-49-ed.ngrok-free.app/game/winner/"})
+                # return HttpResponseRedirect('/game/winner/')
 
             return JsonResponse({"count": user.count})
         except MouseUser.DoesNotExist:
@@ -166,7 +167,7 @@ def mission_view(request):
             user.save()
 
             if user.count >= 1000:
-                return HttpResponseRedirect('/winner/')
+                return render(request, "game/winner.html", {"user": user})
 
             return JsonResponse({
                 "count": user.count,
@@ -190,7 +191,7 @@ def mission_view(request):
 
 
 
-def upper(request):
+def multiplier(request):
 
     user_id = request.session.get("user_id")
     if not user_id:
@@ -199,10 +200,10 @@ def upper(request):
     if request.method == "POST":
         user, created = MouseUser.objects.get_or_create(user_id=user_id)
 
-        if user.count > 10:
+        if user.count >= 100 and user.factor <= 10:
 
-            user.factor += 1
-            user.count -= 10
+            user.factor += 9
+            user.count -= 100
 
             user.save()
 
