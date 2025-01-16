@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.http import JsonResponse, HttpResponseRedirect
 from .models import Tasks, MouseUser
 import json
 
@@ -9,7 +9,15 @@ import json
 # !!!!!!!!!!!!!!
 
 def save_user_data(request):
+    """
+    Создает или обновляет данные о пользователе.
 
+    POST: Создает нового пользователя или обновляет сессию существующего.
+    GET: Получает пользователя по идентификатору из сессии и отображает главную страницу.
+
+    :param request: HttpRequest
+    :return: JsonResponse или рендер страницы
+    """
     if request.method == "POST":
         try:
             data = json.loads(request.body)
@@ -53,7 +61,12 @@ def save_user_data(request):
 # !!!!!!!!!!!!!!
 
 def main_page_view(request):
+    """
+    Отображает главную страницу для авторизованного пользователя.
 
+    :param request: HttpRequest
+    :return: HttpResponse или HttpResponseRedirect
+    """
     user_id = request.session.get("user_id")
 
     if not user_id:
@@ -65,7 +78,12 @@ def main_page_view(request):
 
 
 def tasks_view(request):
+    """
+    Отображает список задач пользователя.
 
+    :param request: HttpRequest
+    :return: HttpResponse или JsonResponse
+    """
     user_id = request.session.get("user_id")
 
     if not user_id:
@@ -79,7 +97,12 @@ def tasks_view(request):
 
 
 def friends_view(request):
+    """
+    Отображает список друзей пользователя.
 
+    :param request: HttpRequest
+    :return: HttpResponse или JsonResponse
+    """
     user_id = request.session.get("user_id")
 
     if not user_id:
@@ -95,7 +118,12 @@ def friends_view(request):
 # !!!!!!!!!!!!!!
 
 def increment_count(request):
+    """
+    Увеличивает счёт пользователя на основе его текущего множителя.
 
+    :param request: HttpRequest
+    :return: JsonResponse
+    """
     user_id = request.session.get("user_id")
 
     if not user_id:
@@ -123,6 +151,12 @@ def increment_count(request):
 
 
 def mission_view(request):
+    """
+    Обрабатывает выполнение задачи пользователем и начисляет очки.
+
+    :param request: HttpRequest
+    :return: JsonResponse или HttpResponse
+    """
     user_id = request.session.get("user_id")
 
     # Проверяем, есть ли user_id в сессии
@@ -191,7 +225,12 @@ def mission_view(request):
 
 
 def multiplier(request):
+    """
+    Увеличивает множитель очков пользователя, если у него достаточно очков.
 
+    :param request: HttpRequest
+    :return: JsonResponse
+    """
     user_id = request.session.get("user_id")
     if not user_id:
         return JsonResponse({"error": "User ID not found in session"}, status=400)
@@ -211,7 +250,12 @@ def multiplier(request):
 
 
 def autoclick(request):
+    """
+    Автоматически увеличивает счёт пользователя на 1.
 
+    :param request: HttpRequest
+    :return: JsonResponse
+    """
     user_id = request.session.get("user_id")
 
     if not user_id:
