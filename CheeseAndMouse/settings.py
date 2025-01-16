@@ -16,8 +16,6 @@ import os
 
 load_dotenv()
 
-from django.conf.global_settings import MEDIA_URL
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -37,7 +35,6 @@ ALLOWED_HOSTS = ['*']
 
 INTERNAL_IPS = ['*']
 
-# X_FRAME_OPTIONS = 'ALLOWALL'
 
 SECURE_CROSS_ORIGIN_OPENER_POLICY = None  # Отключить строгие политики для сторонних контекстов
 SECURE_REFERRER_POLICY = "strict-origin-when-cross-origin"
@@ -51,11 +48,10 @@ CSRF_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SECURE = True
 
 CSRF_TRUSTED_ORIGINS = [
-    'https://5a20-2a09-bac5-5982-2dc-00-49-ed.ngrok-free.app',  # Замените на ваш адрес
+    'https://5a20-2a09-bac5-5982-2dc-00-49-ed.ngrok-free.app',  # Вставьте ваш адрес
 ]
 
 # Application definition
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -74,7 +70,6 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 ROOT_URLCONF = 'CheeseAndMouse.urls'
@@ -143,18 +138,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-# # Для разработки: указываем директории со статикой
-# STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-#
-# # Для продакшена: сюда собираются все файлы командой collectstatic
-# STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-#
-# # URL для доступа к статическим файлам
-# STATIC_URL = '/static/'
 
 STATIC_URL = '/static/'
-STATICFILES_DIRS = [BASE_DIR / "static"]  # Проверьте, что указана правильная директория
-STATIC_ROOT = BASE_DIR / "staticfiles"  # Для collectstatic (production)
+STATICFILES_DIRS = [BASE_DIR / "static"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

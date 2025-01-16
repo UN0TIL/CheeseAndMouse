@@ -23,10 +23,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('', TemplateView.as_view(template_name='game/load_screen.html'), name='load_screen'),
     path('game/', include('game.urls')),
-    # path('winner/', TemplateView.as_view(template_name='game/winner.html'), name='winner'),
     path('admin/', admin.site.urls),
-    # path('', include('game.urls')),
-    # path('', TemplateView.as_view(template_name='game/test.html'), name='test'),
 ]
 
 if settings.DEBUG:
